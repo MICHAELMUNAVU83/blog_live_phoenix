@@ -14,5 +14,6 @@ defmodule BlogLive.Blogs.Blog do
     blog
     |> cast(attrs, [:title, :body])
     |> validate_required([:title, :body])
+    |> validate_length(:title, min: 3)
   end
 end
