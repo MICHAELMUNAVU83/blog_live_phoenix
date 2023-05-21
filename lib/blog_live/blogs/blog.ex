@@ -14,6 +14,12 @@ defmodule BlogLive.Blogs.Blog do
     blog
     |> cast(attrs, [:title, :body])
     |> validate_required([:title, :body])
+
+
     |> unique_constraint(:title)
+
+
+
+
   end
 end
