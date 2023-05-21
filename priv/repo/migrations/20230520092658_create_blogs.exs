@@ -8,5 +8,7 @@ defmodule BlogLive.Repo.Migrations.CreateBlogs do
 
       timestamps()
     end
+
+    create unique_index(:blogs, [:title])
   end
 end
