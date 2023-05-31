@@ -9,7 +9,6 @@
       action={@live_action}
       blog={@blog}
       return_to={Routes.blog_index_path(@socket, :index)}
-      
     />
   </.modal>
 <% end %>
@@ -30,7 +29,7 @@
         <td><%= blog.body %></td>
         show images
 
-
+        display images
         <td>
           <span>
             <%= live_redirect("Show", to: Routes.blog_show_path(@socket, :show, blog)) %>

@@ -5,6 +5,7 @@ defmodule BlogLive.Blogs.Blog do
   schema "blogs" do
     field(:body, :string)
     field(:title, :string)
+    
 
     timestamps()
   end
