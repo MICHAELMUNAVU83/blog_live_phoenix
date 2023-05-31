@@ -3,8 +3,8 @@ defmodule BlogLive.Blogs.Blog do
   import Ecto.Changeset
 
   schema "blogs" do
-    field :body, :string
-    field :title, :string
+    field(:body, :string)
+    field(:title, :string)
 
     timestamps()
   end
@@ -14,12 +14,6 @@ defmodule BlogLive.Blogs.Blog do
     blog
     |> cast(attrs, [:title, :body])
     |> validate_required([:title, :body])
-
-
     |> unique_constraint(:title)
-
-
-
-
   end
 end

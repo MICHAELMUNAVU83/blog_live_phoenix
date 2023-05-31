@@ -20,8 +20,6 @@ defmodule BlogLiveWeb.Router do
   scope "/", BlogLiveWeb do
     pipe_through :browser
 
-
-
     live "/", BlogLive.Index, :index
     live "/blogs/new", BlogLive.Index, :new
     live "/blogs/:id/edit", BlogLive.Index, :edit

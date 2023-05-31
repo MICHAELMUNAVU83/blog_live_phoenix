@@ -10,7 +10,9 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> assign(:uploaded_files, [])
+     |> allow_upload(:image, accept: ~w(.jpg .jpeg .png), max_entries: 1)}
   end
 
   @impl true
@@ -24,6 +26,19 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
   end
 
   def handle_event("save", %{"blog" => blog_params}, socket) do
+    uploaded_files =
+      consume_uploaded_entries(socket, :image, fn %{path: path}, _entry ->
+        dest =
+          Path.join([:code.priv_dir(:blog_live), "static", "uploads", Path.basename(path)])
+
+        # The `static/uploads` directory must exist for `File.cp!/2`
+        # and MyAppWeb.static_paths/0 should contain uploads to work,.
+        File.cp!(path, dest)
+        {:ok, "/uploads/ " <> Path.basename(dest)}
+      end)
+
+    {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
+    IO.inspect(socket.assigns.blog)
     save_blog(socket, socket.assigns.action, blog_params)
   end
 
