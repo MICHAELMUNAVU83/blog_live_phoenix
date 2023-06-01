@@ -18,6 +18,7 @@
     <tr>
       <th>Title</th>
       <th>Body</th>
+      <th>Image</th>
 
       <th></th>
     </tr>
@@ -27,9 +28,11 @@
       <tr id={"blog-#{blog.id}"}>
         <td><%= blog.title %></td>
         <td><%= blog.body %></td>
-        show images
+        <td>
+         <img src={blog.blog_image} alt="doctor" class="h-[500px] object-cover" />
+         </td>
 
-        display images
+
         <td>
           <span>
             <%= live_redirect("Show", to: Routes.blog_show_path(@socket, :show, blog)) %>

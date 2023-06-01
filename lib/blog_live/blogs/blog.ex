@@ -5,7 +5,7 @@ defmodule BlogLive.Blogs.Blog do
   schema "blogs" do
     field(:body, :string)
     field(:title, :string)
-    
+    field(:blog_image, :string)
 
     timestamps()
   end
@@ -13,7 +13,7 @@ defmodule BlogLive.Blogs.Blog do
   @doc false
   def changeset(blog, attrs) do
     blog
-    |> cast(attrs, [:title, :body])
+    |> cast(attrs, [:title, :body, :blog_image])
     |> validate_required([:title, :body])
     |> unique_constraint(:title)
   end

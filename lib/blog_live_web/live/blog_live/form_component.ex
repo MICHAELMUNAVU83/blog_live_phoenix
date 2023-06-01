@@ -37,12 +37,13 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
         # The `static/uploads` directory must exist for `File.cp!/2`
         # and MyAppWeb.static_paths/0 should contain uploads to work,.
         File.cp!(path, dest)
-        {:ok, "/uploads/ " <> Path.basename(dest)}
+        {:ok, "/uploads/" <> Path.basename(dest)}
       end)
 
     {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
+    new_blog_params = Map.put(blog_params, "blog_image", List.first(uploaded_files))
 
-    save_blog(socket, socket.assigns.action, blog_params)
+    save_blog(socket, socket.assigns.action, new_blog_params)
   end
 
   defp save_blog(socket, :edit, blog_params) do

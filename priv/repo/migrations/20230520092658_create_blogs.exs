@@ -3,12 +3,13 @@ defmodule BlogLive.Repo.Migrations.CreateBlogs do
 
   def change do
     create table(:blogs) do
-      add :title, :string
-      add :body, :text
+      add(:title, :string)
+      add(:body, :text)
+      add(:blog_image, :string)
 
       timestamps()
     end
 
-    create unique_index(:blogs, [:title])
+    create(unique_index(:blogs, [:title]))
   end
 end
