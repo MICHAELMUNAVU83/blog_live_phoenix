@@ -17,10 +17,28 @@
     <%= textarea(f, :body) %>
     <%= error_tag(f, :body) %>
 
+    <%= for {ref, msg} <- @uploads.image.errors do %>
+      <div class="error"><%= Phoenix.Naming.humanize(msg) %></div>
+    <% end %>
 
-    
     <%= label(f, :image) %>
     <%= live_file_input(@uploads.image) %>
+
+    <%= for entry <- @uploads.image.entries do %>
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <%= live_img_preview(entry, style: "width: 400px; max-height: 400px;") %>
+        <progress value={entry.progress} max="100"><%= entry.progress %>%</progress>
+        <button
+          type="button"
+          phx-click="cancel-upload"
+          phx-value-ref={entry.ref}
+          aria-label="cancel"
+          phx-target={@myself}
+        >
+          &times;
+        </button>
+      </div>
+    <% end %>
 
     <div>
       <%= submit("Save", phx_disable_with: "Saving...") %>

@@ -12,7 +12,7 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
      |> assign(assigns)
      |> assign(:changeset, changeset)
      |> assign(:uploaded_files, [])
-     |> allow_upload(:image, accept: ~w(.jpg .jpeg .png), max_entries: 1)}
+     |> allow_upload(:image, accept: ~w(.jpg .jpeg .png), max_entries: 2)}
   end
 
   @impl true
@@ -23,6 +23,10 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
       |> Map.put(:action, :validate)
 
     {:noreply, assign(socket, :changeset, changeset)}
+  end
+
+  def handle_event("cancel-upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :image, ref)}
   end
 
   def handle_event("save", %{"blog" => blog_params}, socket) do
