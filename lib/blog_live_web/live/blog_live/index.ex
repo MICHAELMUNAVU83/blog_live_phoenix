@@ -3,13 +3,16 @@ defmodule BlogLiveWeb.BlogLive.Index do
 
   alias BlogLive.Blogs
   alias BlogLive.Blogs.Blog
+  alias BlogLive.Accounts
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :blogs, list_blogs())}
-  end
+  def mount(_params, session, socket) do
+    user =
+      Accounts.get_user_by_session_token(session["user_token"])
+      |> IO.inspect(label: "user in mount")
 
-  
+    {:ok, socket |> assign(:user, user) |> assign(:blogs, list_blogs())}
+  end
 
   @impl true
   def handle_params(params, _url, socket) do
@@ -23,6 +26,8 @@ defmodule BlogLiveWeb.BlogLive.Index do
   end
 
   defp apply_action(socket, :new, _params) do
+    IO.inspect(socket.assigns.user.id)
+
     socket
     |> assign(:page_title, "New Blog")
     |> assign(:blog, %Blog{})

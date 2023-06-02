@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       blog={@blog}
+      user={@user}
       return_to={Routes.blog_index_path(@socket, :index)}
     />
   </.modal>
@@ -19,6 +20,7 @@
       <th>Title</th>
       <th>Body</th>
       <th>Image</th>
+      
 
       <th></th>
     </tr>
@@ -29,9 +31,8 @@
         <td><%= blog.title %></td>
         <td><%= blog.body %></td>
         <td>
-         <img src={blog.blog_image} alt="doctor" class="h-[500px] object-cover" />
-         </td>
-
+          <img src={blog.blog_image} alt="doctor" class="h-[500px] object-cover" />
+        </td>
 
         <td>
           <span>

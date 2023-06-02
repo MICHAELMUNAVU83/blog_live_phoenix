@@ -30,6 +30,8 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
   end
 
   def handle_event("save", %{"blog" => blog_params}, socket) do
+    IO.inspect(socket.assigns, label: "socket.assigns")
+
     uploaded_files =
       consume_uploaded_entries(socket, :image, fn %{path: path}, _entry ->
         dest = Path.join([:code.priv_dir(:blog_live), "static", "uploads", Path.basename(path)])
@@ -41,7 +43,10 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
       end)
 
     {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
-    new_blog_params = Map.put(blog_params, "blog_image", List.first(uploaded_files))
+
+    new_blog_params =
+      Map.put(blog_params, "blog_image", List.first(uploaded_files))
+      |> Map.put("user_id", socket.assigns.user.id)
 
     save_blog(socket, socket.assigns.action, new_blog_params)
   end

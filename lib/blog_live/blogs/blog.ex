@@ -6,6 +6,7 @@ defmodule BlogLive.Blogs.Blog do
     field(:body, :string)
     field(:title, :string)
     field(:blog_image, :string)
+    belongs_to(:user, BlogLive.Users.User)
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule BlogLive.Blogs.Blog do
   @doc false
   def changeset(blog, attrs) do
     blog
-    |> cast(attrs, [:title, :body, :blog_image])
+    |> cast(attrs, [:title, :body, :blog_image, :user_id])
     |> validate_required([:title, :body])
     |> unique_constraint(:title)
   end
