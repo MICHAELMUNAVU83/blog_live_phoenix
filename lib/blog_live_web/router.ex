@@ -24,7 +24,7 @@ defmodule BlogLiveWeb.Router do
     live("/blogs/new", BlogLive.Index, :new)
     live("/blogs/:id/edit", BlogLive.Index, :edit)
 
-    live("/blogs/:id", BlogLive.Show, :show)
+    live("/blogs/:id", BlogLive.Index, :show)
     live("/blogs/:id/show/edit", BlogLive.Show, :edit)
   end
 

@@ -7,9 +7,7 @@ defmodule BlogLiveWeb.BlogLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-    user =
-      Accounts.get_user_by_session_token(session["user_token"])
-      |> IO.inspect(label: "user in mount")
+    user = Accounts.get_user_by_session_token(session["user_token"])
 
     {:ok, socket |> assign(:user, user) |> assign(:blogs, list_blogs())}
   end
@@ -22,6 +20,12 @@ defmodule BlogLiveWeb.BlogLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Blog")
+    |> assign(:blog, Blogs.get_blog!(id))
+  end
+
+  defp apply_action(socket, :show, %{"id" => id}) do
+    socket
+    |> assign(:page_title, "Show Blog")
     |> assign(:blog, Blogs.get_blog!(id))
   end
 

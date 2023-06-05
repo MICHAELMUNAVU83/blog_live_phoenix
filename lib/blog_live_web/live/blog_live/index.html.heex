@@ -14,13 +14,26 @@
   </.modal>
 <% end %>
 
+<%= if @live_action in [:show] do %>
+  <.modal return_to={Routes.blog_index_path(@socket, :index)}>
+    <.live_component
+      module={BlogLiveWeb.BlogLive.ShowComponent}
+      id={@blog.id || :new}
+      title={@page_title}
+      action={@live_action}
+      blog={@blog}
+      user={@user}
+      return_to={Routes.blog_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
 <table>
   <thead>
     <tr>
       <th>Title</th>
       <th>Body</th>
       <th>Image</th>
-      
 
       <th></th>
     </tr>
@@ -36,7 +49,7 @@
 
         <td>
           <span>
-            <%= live_redirect("Show", to: Routes.blog_show_path(@socket, :show, blog)) %>
+            <%= live_redirect("Show", to: Routes.blog_index_path(@socket, :show, blog)) %>
           </span>
           <span><%= live_patch("Edit", to: Routes.blog_index_path(@socket, :edit, blog)) %></span>
           <span>
