@@ -43,9 +43,16 @@
       <tr id={"blog-#{blog.id}"}>
         <td><%= blog.title %></td>
         <td><%= blog.body %></td>
+
+        <%= for image <- blog.blog_image do %>
         <td>
-          <img src={blog.blog_image} alt="doctor" class="h-[500px] object-cover" />
-        </td>
+
+          <img src={image} alt="doctor" class="h-[500px] object-cover" />
+          </td>
+
+        <% end %>
+
+
 
         <td>
           <span>

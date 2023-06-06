@@ -5,7 +5,7 @@ defmodule BlogLive.Repo.Migrations.CreateBlogs do
     create table(:blogs) do
       add(:title, :string)
       add(:body, :text)
-      add(:blog_image, :string)
+      add(:blog_image, {:array, :string}, default: [])
       add(:user_id, references(:users, on_delete: :delete_all), null: false)
 
       timestamps()

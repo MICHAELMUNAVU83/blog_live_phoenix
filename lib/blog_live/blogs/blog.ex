@@ -5,7 +5,7 @@ defmodule BlogLive.Blogs.Blog do
   schema "blogs" do
     field(:body, :string)
     field(:title, :string)
-    field(:blog_image, :string)
+    field(:blog_image, {:array, :string} , default: [])
     belongs_to(:user, BlogLive.Users.User)
 
     timestamps()

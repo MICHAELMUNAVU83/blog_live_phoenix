@@ -42,10 +42,12 @@ defmodule BlogLiveWeb.BlogLive.FormComponent do
         {:ok, "/uploads/" <> Path.basename(dest)}
       end)
 
+    IO.inspect(uploaded_files, label: "uploaded_files")
+
     {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
 
     new_blog_params =
-      Map.put(blog_params, "blog_image", List.first(uploaded_files))
+      Map.put(blog_params, "blog_image", uploaded_files)
       |> Map.put("user_id", socket.assigns.user.id)
 
     save_blog(socket, socket.assigns.action, new_blog_params)

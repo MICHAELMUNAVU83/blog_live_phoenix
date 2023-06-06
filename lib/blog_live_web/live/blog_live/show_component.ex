@@ -5,19 +5,17 @@ defmodule BlogLiveWeb.BlogLive.ShowComponent do
 
   def render(assigns) do
     ~H"""
-
-
-<div>
-
-
+    <div>
       <div id="myModal" class="modal">
         <div class="modal-content">
-         <%= @blog.title %>
+          <div>
+            <%= @blog.title %>
+            z
           <!-- Add your content here -->
+          </div>
         </div>
       </div>
     </div>
-
     """
   end
 
