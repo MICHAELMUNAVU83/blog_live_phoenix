@@ -1,0 +1,28 @@
+<h1>Listing Mats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for mat <- @mats do %>
+    <tr>
+      <td><%= mat.name %></td>
+      <td><%= mat.title %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.mat_path(@conn, :show, mat) %></span>
+        <span><%= link "Edit", to: Routes.mat_path(@conn, :edit, mat) %></span>
+        <span><%= link "Delete", to: Routes.mat_path(@conn, :delete, mat), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Mat", to: Routes.mat_path(@conn, :new) %></span>

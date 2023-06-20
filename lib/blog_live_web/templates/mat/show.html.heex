@@ -1,0 +1,18 @@
+<h1>Show Mat</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @mat.name %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @mat.title %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.mat_path(@conn, :edit, @mat) %></span> |
+<span><%= link "Back", to: Routes.mat_path(@conn, :index) %></span>
